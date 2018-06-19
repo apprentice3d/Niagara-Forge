@@ -38,6 +38,7 @@ class MarkUp3DExtension extends Autodesk.Viewing.Extension {
         this.initMesh_Line = this.initMesh_Line.bind(this);
         this.update_Line = this.update_Line.bind(this);
         this.update_DivLabel = this.update_DivLabel.bind(this);
+        this.setupUI = this.setupUI.bind(this);
 
         // Shaders
         this.vertexShader = `
@@ -131,7 +132,15 @@ class MarkUp3DExtension extends Autodesk.Viewing.Extension {
         this.offset = this.viewer.model.getData().globalOffset; // use global offset to align pointCloud with lmv scene
         this.viewer.disableSelection(true);
 
+        this.setupUI();
         this.setMarkupData(this.sampleData);
+
+
+        return true;
+
+    }
+
+    setupUI() {
 
         let label = document.createElement('div');
         label.id = "label";
@@ -181,9 +190,6 @@ class MarkUp3DExtension extends Autodesk.Viewing.Extension {
         document.addEventListener('mousewheel', e => {
             this.onMouseMove(e)
         }, true);
-
-        return true;
-
     }
 
     updateHitTest(event) {

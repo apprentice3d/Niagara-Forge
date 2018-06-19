@@ -24,3 +24,7 @@
 #autodesk_logo img {
     max-width: 50%;
 }
+
+body {
+    margin:0;
+}

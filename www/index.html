@@ -2,46 +2,18 @@
 
 <head>
     <meta name="viewport" content="width=device-width, minimum-scale=1.0, initial-scale=1, user-scalable=no" />
-    <meta charset="utf-8">
+    <meta charset="UTF-8">
 
-  <!-- Autodesk Forge Viewer files -->
-  <link rel="stylesheet" href="https://developer.api.autodesk.com/modelderivative/v2/viewers/style.min.css?v=v4.1" type="text/css">
-  <script src="https://developer.api.autodesk.com/modelderivative/v2/viewers/three.min.js"></script>
-  <script src="https://developer.api.autodesk.com/modelderivative/v2/viewers/viewer3D.min.js?v=v4.1"></script>
+    <!-- Autodesk Forge Viewer files -->
+    <link rel="stylesheet" href="https://developer.api.autodesk.com/modelderivative/v2/viewers/style.min.css?v=v3.3" type="text/css">
+    <script src="https://developer.api.autodesk.com/modelderivative/v2/viewers/three.min.js"></script>
+    <script src="https://developer.api.autodesk.com/modelderivative/v2/viewers/viewer3D.min.js?v=v3.3"></script>
 
 
     <!-- Developer CSS -->
-    <style>
-        #MyControls {
-            position: absolute;
-            /* top: 5px; */
-            /* left: 5px; */
-            right: 15px;
-            bottom: 15px;
-            z-index: 1;
-            /* padding: 1em; */
-            /* font-size: 1em; */
-            /* cursor: pointer; */
-            /* box-shadow: 5px 5px 5px #888888; */
-            border: 1px solid #D4D4D4;
-            background-color: white;
-            border-radius: 5px;
-        }
-
-        #autodesk_logo {
-            position: absolute;
-            top: 15px;
-            left: 15px;
-            z-index: 1;
-        }
-        #autodesk_logo img {
-            max-width: 50%;
-        }
-    </style>
+    <link rel="stylesheet" href="./assets/css/main.css"/>
 
 </head>
-
-
 
 <body>
 
@@ -53,6 +25,8 @@
 
     <!-- Developer JS -->
     <script src="./assets/js/niagara.js"></script>
+    <script src="./assets/js/markupExt.js"></script>
+    <script src="./assets/js/transformationExplorer.js"></script>
     <script>
         var viewerApp;
         let viewer = null;
@@ -69,14 +43,15 @@
                 var accessToken = data["access_token"]
                 var expireTimeSeconds = data["expires_in"];
                 onGetAccessToken(accessToken, expireTimeSeconds);
-            }
+            },
+            useADP: false,
 
         };
         var documentId = 'urn:dXJuOmFkc2sub2JqZWN0czpvcy5vYmplY3Q6bmlhZ2FyYS1wb2MvQk9mZmljZV9uZXdfUm9vbXMubndk';
         Autodesk.Viewing.Initializer(options, function onInitialized() {
             viewerApp = new Autodesk.Viewing.ViewingApplication('MyViewerDiv');
             let config3d = {
-                extensions: ['NiagaraExtension']
+                // extensions: ['TransExplorerExtension']
             };
             viewerApp.registerViewer(viewerApp.k3D, Autodesk.Viewing.Private.GuiViewer3D, config3d);
             viewerApp.loadDocument(documentId, onDocumentLoadSuccess, onDocumentLoadFailure);
@@ -88,7 +63,9 @@
             // We could still make use of Document.getSubItemsWithProperties()
             // However, when using a ViewingApplication, we have access to the **bubble** attribute,
             // which references the root node of a graph that wraps each object from the Manifest JSON.
-            var viewables = viewerApp.bubble.search({ 'type': 'geometry' });
+            var viewables = viewerApp.bubble.search({
+                'type': 'geometry'
+            });
             if (viewables.length === 0) {
                 console.error('Document contains no viewables.');
                 return;
@@ -96,16 +73,16 @@
 
             // Choose any of the avialble viewables
             viewerApp.selectItem(viewables[0].data, onItemLoadSuccess, onItemLoadFail);
-
-
         }
 
         function onDocumentLoadFailure(viewerErrorCode) {
             console.error('onDocumentLoadFailure() - errorCode:' + viewerErrorCode);
         }
 
-        function onItemLoadSuccess(reported_viewer, item) {
+        function onItemLoadSuccess(active_viewer, item) {
             console.log('Document loaded successfully');
+            // active_viewer.loadExtension("NiagaraExtension");
+            active_viewer.loadExtension("MarkUp3DExtension");
         }
 
         function onItemLoadFail(errorCode) {

@@ -5,9 +5,9 @@
     <meta charset="UTF-8">
 
     <!-- Autodesk Forge Viewer files -->
-    <link rel="stylesheet" href="https://developer.api.autodesk.com/modelderivative/v2/viewers/style.min.css?v=v3.3" type="text/css">
+    <link rel="stylesheet" href="https://developer.api.autodesk.com/modelderivative/v2/viewers/style.min.css?v=v4.1" type="text/css">
     <script src="https://developer.api.autodesk.com/modelderivative/v2/viewers/three.min.js"></script>
-    <script src="https://developer.api.autodesk.com/modelderivative/v2/viewers/viewer3D.min.js?v=v3.3"></script>
+    <script src="https://developer.api.autodesk.com/modelderivative/v2/viewers/viewer3D.min.js?v=v4.1"></script>
 
 
     <!-- Developer CSS -->
@@ -51,7 +51,7 @@
         Autodesk.Viewing.Initializer(options, function onInitialized() {
             viewerApp = new Autodesk.Viewing.ViewingApplication('MyViewerDiv');
             let config3d = {
-                // extensions: ['TransExplorerExtension']
+                extensions: ['TransExplorerExtension']
             };
             viewerApp.registerViewer(viewerApp.k3D, Autodesk.Viewing.Private.GuiViewer3D, config3d);
             viewerApp.loadDocument(documentId, onDocumentLoadSuccess, onDocumentLoadFailure);

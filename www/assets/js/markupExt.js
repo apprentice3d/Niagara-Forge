@@ -17,7 +17,7 @@ class MarkUp3DExtension extends Autodesk.Viewing.Extension {
         this.raycaster.params.PointCloud.threshold = 5; // hit-test markup size.  Change this if markup 'hover' doesn't work
         this.size = 50.0; // markup size.  Change this if markup size is too big or small
         this.lineColor = 0xffffff; // white
-        this.labelOffset = new THREE.Vector3(10, 10, 1); // label offset 3D line offset position
+        this.labelOffset = new THREE.Vector3(10, 10, 10); // label offset 3D line offset position
         this.xDivOffset = -0.1; // x offset position of the div label wrt 3D line.
         this.yDivOffset = 0.3; // y offset position of the div label wrt 3D line.
 
@@ -130,7 +130,6 @@ class MarkUp3DExtension extends Autodesk.Viewing.Extension {
 
         // Specific code goes here
         this.offset = this.viewer.model.getData().globalOffset; // use global offset to align pointCloud with lmv scene
-        this.viewer.disableSelection(true);
 
         this.setupUI();
         this.setMarkupData(this.sampleData);

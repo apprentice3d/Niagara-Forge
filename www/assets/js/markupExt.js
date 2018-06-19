@@ -167,7 +167,7 @@ class MarkUp3DExtension extends Autodesk.Viewing.Extension {
         window.addEventListener("onMarkupClick", e => {
             label.style.display = "block";
             moveLabel(e.detail);
-            label.innerHTML = `<img src="${(e.detail.imgSrc)}"><br><h4>${e.detail.id}</h4>`;
+            label.innerHTML = `<img style="width:150px;" src="${(e.detail.imgSrc)}"><br><h4>${e.detail.id}</h4>`;
         }, false);
 
 

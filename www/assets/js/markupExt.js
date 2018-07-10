@@ -50,7 +50,7 @@ class MarkUp3DExtension extends Autodesk.Viewing.Extension {
             gl_PointSize = size * ( size / (length(mvPosition.xyz) + 1.0) );
             gl_Position = projectionMatrix * mvPosition;
         }
-    `
+    `;
 
         this.fragmentShader = `
         uniform sampler2D tex;
@@ -60,7 +60,7 @@ class MarkUp3DExtension extends Autodesk.Viewing.Extension {
             gl_FragColor = gl_FragColor * texture2D(tex, vec2((gl_PointCoord.x+vColor.y*1.0)/4.0, 1.0-gl_PointCoord.y));
             if (gl_FragColor.w < 0.5) discard;
         }
-    `
+    `;
 
 
         // Sample data
@@ -125,7 +125,7 @@ class MarkUp3DExtension extends Autodesk.Viewing.Extension {
     customize() {
         // var self = this;
         this.viewer.removeEventListener(Autodesk.Viewing.GEOMETRY_LOADED_EVENT,
-            this.customize)
+            this.customize);
 
 
         // Specific code goes here
@@ -150,7 +150,7 @@ class MarkUp3DExtension extends Autodesk.Viewing.Extension {
             border: 2px solid #ccc;
             background-color: #ffffff;
             border-radius: 5px;
-            padding: 10px;`
+            padding: 10px;`;
 
 
         document.body.appendChild(label);
@@ -162,7 +162,7 @@ class MarkUp3DExtension extends Autodesk.Viewing.Extension {
         // listen for the 'Markup' event, to re-position our <DIV> POPUP box
         window.addEventListener("onMarkupMove", e => {
             moveLabel(e.detail)
-        }, false)
+        }, false);
         window.addEventListener("onMarkupClick", e => {
             label.style.display = "block";
             moveLabel(e.detail);
@@ -195,11 +195,11 @@ class MarkUp3DExtension extends Autodesk.Viewing.Extension {
         // on mouse move event, check if ray hit with pointcloud, move selection cursor
         // https://stackoverflow.com/questions/28209645/raycasting-involving-individual-points-in-a-three-js-pointcloud
         if (!this.pointCloud) return;
-        var x = (event.clientX / window.innerWidth) * 2 - 1;
-        var y = -(event.clientY / window.innerHeight) * 2 + 1;
-        var vector = new THREE.Vector3(x, y, 0.5).unproject(this.camera);
+        let x = (event.clientX / window.innerWidth) * 2 - 1;
+        let y = -(event.clientY / window.innerHeight) * 2 + 1;
+        let vector = new THREE.Vector3(x, y, 0.5).unproject(this.camera);
         this.raycaster.set(this.camera.position, vector.sub(this.camera.position).normalize());
-        var nodes = this.raycaster.intersectObject(this.pointCloud);
+        let nodes = this.raycaster.intersectObject(this.pointCloud);
         if (nodes.length > 0) {
             if (this.hovered)
                 this.geometry.colors[this.hovered].r = 1.0;
@@ -229,8 +229,8 @@ class MarkUp3DExtension extends Autodesk.Viewing.Extension {
             this.scene.remove(this.pointCloud); //replace existing pointCloud Mesh
         else {
             // create new point cloud material
-            var texture = THREE.ImageUtils.loadTexture("assets/img/icons.png");
-            var material = new THREE.ShaderMaterial({
+            let texture = THREE.ImageUtils.loadTexture("./assets/img/icons.png");
+            let material = new THREE.ShaderMaterial({
                 vertexColors: THREE.VertexColors,
                 fragmentShader: this.fragmentShader,
                 vertexShader: this.vertexShader,
@@ -247,15 +247,16 @@ class MarkUp3DExtension extends Autodesk.Viewing.Extension {
                     }
                 }
             });
+            this.pointCloud = new THREE.PointCloud(this.geometry, material);
+            this.pointCloud.position.sub(this.offset);
+            this.scene.add(this.pointCloud);
         }
-        this.pointCloud = new THREE.PointCloud(this.geometry, material);
-        this.pointCloud.position.sub(this.offset);
-        this.scene.add(this.pointCloud);
+
     }
 
 
     initMesh_Line() {
-        var geom = new THREE.Geometry();
+        let geom = new THREE.Geometry();
         geom.vertices.push(new THREE.Vector3(0, 0, 0), new THREE.Vector3(1, 1, 1), );
         this.line3d = new THREE.Line(geom, new THREE.LineBasicMaterial({
             color: this.lineColor,
@@ -266,14 +267,14 @@ class MarkUp3DExtension extends Autodesk.Viewing.Extension {
     }
 
     update_Line() {
-        var position = this.pointCloud.geometry.vertices[this.selected].clone();
+        let position = this.pointCloud.geometry.vertices[this.selected].clone();
         this.line3d.geometry.vertices[0] = position;
         this.line3d.geometry.vertices[1].set(position.x + this.labelOffset.x * Math.sign(position.x), position.y + this.labelOffset.y, position.z + this.labelOffset.z);
         this.line3d.geometry.verticesNeedUpdate = true;
     }
 
     update_DivLabel(eventName) {
-        var position = this.line3d.geometry.vertices[1].clone().sub(this.offset);
+        let position = this.line3d.geometry.vertices[1].clone().sub(this.offset);
         this.label = position.project(this.camera);
         
         if(this.selected) {

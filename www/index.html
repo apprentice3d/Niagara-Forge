@@ -15,7 +15,8 @@
     <!-- Developer JS -->
     <script src="./assets/js/niagara.js"></script>
     <script src="./assets/js/markupExt.js"></script>
-    <script src="./assets/js/transformationExplorer.js"></script>
+    <script src="./assets/js/libs/CSS3DRenderer.js"></script>
+    <script src="./assets/js/css3DExt.js"></script>
     <script src="./assets/js/CameraControlExt.js"></script>
     <script src="./assets/js/app.js"></script>
 
@@ -35,7 +36,9 @@
         let divId = "MyViewerDiv";
         let documentId = 'urn:dXJuOmFkc2sub2JqZWN0czpvcy5vYmplY3Q6bmlhZ2FyYS1wb2MvQk9mZmljZV9uZXdfUm9vbXMubndk';
         let tokenFetchingUrl = "https://9irt90dm6j.execute-api.us-east-1.amazonaws.com/prod";
-        let extensionArray = ['CameraControlExtension'];
+        let extensionArray = [ 'Css3dExtension'];
+        // let extensionArray = ['CameraControlExtension'];
+
         setupViewer(divId,documentId,tokenFetchingUrl, extensionArray);
     </script>
 

@@ -1,0 +1,22 @@
+#root {
+    display: grid;
+    margin: 0 auto;
+    padding: 0;
+    justify-content: center;
+    grid-template-columns: 100%;
+
+}
+
+.ForgeViewer {
+    border: 1px solid blue;
+    height: 600px;
+    width: 800px;
+    margin: 0 auto;
+    perspective: 1200px;
+    transform: rotateX(0deg) rotateY(0deg);
+    transition: all 2s;
+}
+
+.ForgeViewer:hover {
+    transform: rotateX(-30deg) rotateY(-30deg);
+}

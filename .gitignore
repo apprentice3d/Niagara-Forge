@@ -57,3 +57,7 @@ fabric.properties
 .cache
 
 /dist/
+/www_react/.cache/
+/www_react/dist/
+/www_react/package-lock.json
+/www_react/node_modules/

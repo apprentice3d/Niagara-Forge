@@ -46,7 +46,7 @@ body {
     /*background-color: red;*/
     background-color: rgba(0,127,127,0.5);
     width: 120px;
-    /*height: 160px;*/
+    height: 50px;
     box-shadow: 0px 0px 12px rgba(0,255,255,0.5);
     border: 1px solid rgba(127,255,255,0.25);
     text-align: center;
@@ -61,6 +61,11 @@ body {
     pointer-events: none;
 }
 
+#checker {
+    text-align: center;
+    vertical-align: middle;
+}
+
 .cssOverlay {
     z-index: 1;
     position: absolute;
@@ -68,4 +73,15 @@ body {
     margin: 0;
     padding: 0;
     pointer-events: none;
+}
+
+
+.infoPanel {
+    position: absolute;
+    z-index: 2;
+    padding: 10px;
+    background-color: rgba(0,127,127,0.5);
+    box-shadow: 0px 0px 12px rgba(0,255,255,0.5);
+    border: 1px solid rgba(127,255,255,0.25);
+    color: white;
 }

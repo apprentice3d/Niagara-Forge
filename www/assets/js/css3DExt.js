@@ -63,8 +63,9 @@ class Css3dExtension extends Autodesk.Viewing.Extension {
         <div class="element">
             <h4>Epsylon</h4>
         </div>
-        <div class="element">
-            <h4>Zeta</h4>
+        <div  class="element">
+        <!--<h4>Epsylon</h4>-->
+            <input type="checkbox" id="checker"> Just checking   
         </div>
         `;
 

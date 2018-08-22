@@ -61,3 +61,4 @@ fabric.properties
 /www_react/dist/
 /www_react/package-lock.json
 /www_react/node_modules/
+/www/temp.html

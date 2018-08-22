@@ -28,7 +28,7 @@ class TransExplorerExtension extends Autodesk.Viewing.Extension {
         this.viewer.addEventListener(Autodesk.Viewing.OBJECT_TREE_CREATED_EVENT,
             this.getObjectTree);
         this.viewer.addEventListener(Autodesk.Viewing.SELECTION_CHANGED_EVENT,
-            this.processSelection)
+            this.processSelection);
 
         let infoPanel = document.createElement('div');
         infoPanel.id = "infoPanel";
@@ -40,7 +40,7 @@ class TransExplorerExtension extends Autodesk.Viewing.Extension {
             border: 2px solid #ccc;
             background-color: #ffffff;
             border-radius: 5px;
-            padding: 10px;`
+            padding: 10px;`;
 
         infoPanel.innerHTML = `
         <p>ID: <span id="infoId"></span></p>
@@ -49,7 +49,7 @@ class TransExplorerExtension extends Autodesk.Viewing.Extension {
         <p>xPosition: <span id="infoX"></span></p>
         <p>yPosition: <span id="infoY"></span></p>
         <p>zPosition: <span id="infoZ"></span></p>
-        `
+        `;
 
         document.body.appendChild(infoPanel);
         this.infoName = document.getElementById("infoName");
@@ -65,7 +65,7 @@ class TransExplorerExtension extends Autodesk.Viewing.Extension {
     unload() {
         console.log('TransExplorerExtension is now unloaded!');
         this.viewer.removeEventListener(Autodesk.Viewing.SELECTION_CHANGED_EVENT,
-            this.processSelection)
+            this.processSelection);
         return true;
     }
 

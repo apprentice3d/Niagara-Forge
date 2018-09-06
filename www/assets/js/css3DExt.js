@@ -45,6 +45,22 @@ class Css3dExtension extends Autodesk.Viewing.Extension {
     // Custom methods
     setupUI() {
 
+        let plaqueMat = new THREE.MeshBasicMaterial({wireframe: true});
+        let plaqueGeometry = new THREE.PlaneGeometry(10,10,10);
+        let plaqueMesh = new THREE.Mesh(plaqueGeometry, plaqueMat);
+        plaqueMesh.rotation.x = Math.PI/2;
+        plaqueMesh.position.y = -100;
+        this.viewer.impl.scene.add(plaqueMesh);
+
+
+
+
+
+
+
+
+
+
         let customUI = document.createElement('div');
         customUI.id = "myUI";
         customUI.innerHTML = `
@@ -71,9 +87,9 @@ class Css3dExtension extends Autodesk.Viewing.Extension {
 
         let objectCSS = new THREE.CSS3DObject(customUI);
 
-        objectCSS.rotation.x = Math.PI/2;
-        objectCSS.position.z = 40;
-        objectCSS.position.y = -70;
+        // objectCSS.rotation.x = Math.PI/2;
+        // objectCSS.position.z = 40;
+        // objectCSS.position.y = -70;
 
 
         let cssRenderer = new THREE.CSS3DRenderer();
@@ -89,6 +105,12 @@ class Css3dExtension extends Autodesk.Viewing.Extension {
 
         let updateUI = () => {
             requestAnimationFrame(updateUI);
+            objectCSS.position.x = plaqueMesh.position.x;
+            objectCSS.position.y = plaqueMesh.position.y;
+            objectCSS.position.z = plaqueMesh.position.z;
+            objectCSS.rotation.x = plaqueMesh.rotation.x;
+            objectCSS.rotation.y = plaqueMesh.rotation.y;
+            objectCSS.rotation.z = plaqueMesh.rotation.z;
             cssRenderer.render(cssScene, this.cam);
         };
 

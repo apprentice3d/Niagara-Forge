@@ -19,6 +19,7 @@
     <script src="./assets/js/css3DExt.js"></script>
     <script src="./assets/js/CameraControlExt.js"></script>
     <script src="./assets/js/categoryExt.js"></script>
+    <script src="./assets/js/tempColor.js"></script>
     <script src="./assets/js/app.js"></script>
 
 </head>
@@ -37,8 +38,8 @@
         let divId = "MyViewerDiv";
         let documentId = 'urn:dXJuOmFkc2sub2JqZWN0czpvcy5vYmplY3Q6bmlhZ2FyYS1wb2MvQk9mZmljZV9uZXdfUm9vbXMubndk';
         let tokenFetchingUrl = "https://9irt90dm6j.execute-api.us-east-1.amazonaws.com/prod";
-        let extensionArray = [ 'Css3dExtension','CategoryExtension'];
-        // let extensionArray = ['CameraControlExtension'];
+        let extensionArray = [ 'TempColorExtension'];
+        // let extensionArray = ['CameraControlExtension', 'Css3dExtension','CategoryExtension', ];
 
         setupViewer(divId,documentId,tokenFetchingUrl, extensionArray);
     </script>
